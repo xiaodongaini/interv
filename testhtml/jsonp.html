@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jsonp</title>
+  <script type="text/javascript">
+    var flightHandler = function(data) {
+      alert('您查询的航班结果是：票价：' + data.price + '元，余票' + data.price + '张。')
+    }
+    // 提供jsonp服务的url地址
+    var url = "http://flightQuery.com/jsonp/flightResult.aspx?code=CA1998&callback=flightHandler";
+    // 创建script标签，设置其属性
+    var script = document.createElement('script')
+    script.setAttribute('src', script)
+    // 把script标签加入head中，此时调用开始
+    document.getElementsByTagName('head')[0].appendChild(script);
+    /** 
+     * 服务器返回代码：
+     * flightHandler({
+     *   "code": "CA1998",
+     *   "price": 1789,
+     *   "tickets": 5
+     * })
+     * jsonp原理：
+     * script标签加载js文件不受同源策略的影响
+     * 要点：
+     * 允许用户传递一个callback参数给服务端，然后服务端返回数据时，会将这个callback参数作为函数名来
+     * 包裹住JSON数据，这样客户端就可以随时定制自己的函数来自动处理返回数据了
+     */
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
+

@@ -1,0 +1,13 @@
+{{ define "email.html" }}
+<p>
+  {{ range $i, $alert := .Alerts }}
+  <p>
+    报警项：<span font-weight="bold">{{ index $alert.Labels "alertname" }}</span>
+    中的：<span font-weight="bold">{{ index $alert.Labels "instance" }}</span>实例
+    在<span font-weight="bold">{{ $alert.StartsAt }}</span>
+    出现<span font-weight="bold" color="red">{{ index $alert.Annotations "description" }}</span>问题
+    详细信息：<span font-weight="bold">{{ index $alert.Annotations "info" }}</span>
+  </p>
+  {{ end }}                                                                                                                                                                                                                        
+</p>
+{{ end }}

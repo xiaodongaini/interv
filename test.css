@@ -1,0 +1,22 @@
+.div{
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+}
+
+1.绝对定位，付margin
+2.绝对定位，transform
+3,外层设置flex,水平垂直居中
+4.外层设置table-cell, text-align:center, vertical-align: middle;
+5. position: 上下左右0，margin: auto;
+
+
+
+文字居中：设置line-height
+父元素table,子元素table-cell,vertica-align:middle, 
+flex 布局

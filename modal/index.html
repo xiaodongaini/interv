@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>测试弹出框方案</title>
+  <style>
+    .outer {
+      width: 100%;
+      height: 600px;
+      background: #ECEFF4;
+      position: relative;
+      padding: 160px;
+    }
+    .button {
+      margin-bottom: 50px;
+      width: 180px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background: #6C72FF;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="outer">
+    <div class="button" id="predictBtn">点击显示预测结果</div>
+    <div class="button" id="reasonBtn">点击显示超量原因</div>
+  </div>
+  <script src="./model.js"></script>
+  <script>
+    var predictBtn = document.getElementById("predictBtn");
+    var reasonBtn = document.getElementById("reasonBtn");
+    var callBack = function(type) {
+      if (type == 1) {
+        alert('执行手工输入的流程')
+      }
+      if (type == 2) {
+        // 是否需要把推荐量返回
+        alert('执行接受推荐的流程')
+
+      }
+      if (type == 3) {
+        // alert('执行查看预测详情流程')
+        window.open("https://www.baidu.com");
+      }
+    }
+    EventUtil.addHandler(predictBtn, 'click', function(){
+      var txt = '<Result>'
+        +'<Status>'
+          +'<Code>000000</Code>'
+          +'<Message>Success.</Message>'
+          +'<UserMessage>成功</UserMessage>'
+        +'</Status>'
+        +'<Data>'
+          +'<RecommendedTransfusionVolume>用血量</RecommendedTransfusionVolume>'
+          +'<MaximalTransfusionVolume>最大值</MaximalTransfusionVolume>'
+          +'<Info>'
+            +'<Summary>AI模型推荐备血：1.0U</Summary>'
+            +'<PredictInfo>预测信息:</PredictInfo>'
+            +'<PredictInfo>-预测信息失血量525ml</PredictInfo>'
+            +'<PredictInfo>-预测信息自体血0U</PredictInfo>'
+            +'<PredictInfo>-其它</PredictInfo>'
+            +'<Reminder>提示</Reminder>'
+            +'<DetailsLinkTitle>点击查看预测详情</DetailsLinkTitle>'
+            +'<DetailsLinkUrl>http://192.168.1.180/transfusion</DetailsLinkUrl>'
+          +'</Info>'
+          +'<RequestId>申请标识</RequestId>'
+        +'</Data>'
+        +'<LogId>logId</LogId>'
+        +'</Result>';
+      renderModal(txt, callBack);
+    });
+    function showReason() {
+      renderReason(reasonCb);
+    }
+    function reasonCb(value) {
+      // console.log('选择的超量原因是：=======', value);
+      alert(value);
+    }
+    EventUtil.addHandler(reasonBtn, 'click', function() {
+      showReason(reasonCb);
+    });
+  </script>
+</body>
+</html>
